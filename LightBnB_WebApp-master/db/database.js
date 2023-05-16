@@ -96,7 +96,7 @@ const getAllReservations = function (guest_id, limit = 10) { // this is not work
    JOIN properties ON properties.id = property_reviews.property_id
    WHERE reservations.guest_id = $1
    GROUP BY reservations.id, properties.id
-   ORDER BY start_date
+   ORDER BY start_date DESC
    LIMIT $2;
   `;
   const params = [guest_id, limit];
@@ -115,8 +115,47 @@ const getAllReservations = function (guest_id, limit = 10) { // this is not work
  * @return {Promise<[{}]>}  A promise to the properties.
  */
 const getAllProperties = (options, limit = 10) => {
+  let queryString = `
+  SELECT properties.*, avg(property_reviews.rating) as average_rating
+  FROM properties
+  JOIN property_reviews ON properties.id = property_id
+  `;
+  let queryParams = [];
+
+  if (options.city) {
+    queryParams.push(`%${options.city}%`);
+    queryString += `WHERE city LIKE $${queryParams.length} `;
+  }
+
+  if (options.owner_id) {
+    const operator = queryParams.length > 0 ? 'AND' : 'WHERE';
+    queryParams.push(options.owner_id);
+    queryString += `${operator} owner_id = $${queryParams.length}`;
+  }
+
+  if (options.minimum_price_per_night && options.maximum_price_per_night) {
+    const operator = queryParams.length > 0 ? 'AND' : 'WHERE';
+    queryParams.push(options.minimum_price_per_night * 100);
+    queryParams.push(options.maximum_price_per_night * 100);
+    queryString += `${operator} cost_per_night BETWEEN $${queryParams.length - 1} AND $${queryParams.length} `;
+  }
+
+  if (options.minimum_rating) {
+    const operator = queryParams.length > 0 ? 'AND' : 'WHERE';
+    queryParams.push(options.minimum_rating);
+    queryString += `${operator} rating >= $${queryParams.length}`
+  }
+
+  queryParams.push(limit);
+  queryString += `
+  GROUP BY properties.id
+  ORDER BY cost_per_night
+  LIMIT $${queryParams.length};
+  `;
+
+  console.log(queryString, queryParams);
   return pool
-    .query(`SELECT * FROM properties LIMIT $1`, [limit])
+    .query(queryString, queryParams)
     .then((result) => {
       if (!result.rows) return null;
       return result.rows;

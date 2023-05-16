@@ -65,7 +65,7 @@ const getUserWithId = function (id) {
  * @param {{name: string, password: string, email: string}} user
  * @return {Promise<{}>} A promise to the user.
  */
-const addUser = function(user) { // this is not working still!!
+const addUser = function(user) {
   const queryString = `
   INSERT INTO users (name, email, password) 
   VALUES ($1, $2, $3) 

@@ -52,7 +52,6 @@ const getUserWithId = function (id) {
     .query(queryString, params)
     .then((result) => {
       if (result.rows) {
-        console.log(result.rows);
         return result.rows[0];
       }
       return null;
@@ -177,7 +176,6 @@ const addProperty = function (property) {
   property.cost_per_night * 100, property.street, property.city, property.province, property.post_code, property.country, property.parking_spaces,
   property.number_of_bathrooms, property.number_of_bedrooms];
 
-  console.log(queryString, queryParams);
   return pool
     .query(queryString, queryParams)
     .then((result) => {

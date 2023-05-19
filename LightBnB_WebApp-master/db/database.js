@@ -2,15 +2,18 @@
 const properties = require("./json/properties.json");
 const users = require("./json/users.json");
 
+const dotenv = require("dotenv");
+dotenv.config();
+
 
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  user: 'labber',
-  password: '123',
-  host: 'localhost',
-  database: 'lightbnb',
-  port: '5432'
+  user: process.env.PGUSER,
+  password: process.env.PGPASSWORD,
+  host: process.env.PGHOST,
+  database: process.env.PGDATABASE,
+  port: process.env.PGPORT
 });
 
 /// Users

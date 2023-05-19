@@ -38,15 +38,20 @@ The simple design allows users to:
 
 ## Technology
  
-This project focused on implementing complex SQL queries, database and ERD (entity relationship diagram) design to integrate the database with a Node backend.
+This project focused on implementing complex SQL queries with node-postgres along with database and ERD (entity relationship diagram) design to integrate the database with a Node backend.
 
 ## Page Features
 
 - Select "Sign Up" to create a new user profile; log in/log out with this email and password
-- Alternately, select "Log In" and enter a fake email and 'password' to log in with seed data
+- Alternately, select "Log In" and enter a seed file email and 'password' to view dummy data
 - Click "Search" to search for rental properties
 - Click "Create Listing" to enter a new rental property into the database
-- Click "My Listings" to view
+- Click "My Listings" to view relevant user listings
+
+## LightBnB Database Entity Relationship Diagram
+
+*ERD*
+![LightBnB ERD](https://github.com/Britt4444/LightBnB/blob/master/LightBnB_WebApp-master/public/docs/drawSQL-lighthousebnb-erd-export-2023-05-17.png?raw=true)
 
 ## Final Product
 
@@ -107,8 +112,8 @@ This project focused on implementing complex SQL queries, database and ERD (enti
 ├── migrations  
 │   ├── 01_schema.sql
 ├── seeds
-│   ├──01_seeds.sql
-|   ├──02_seeds.sql
+│   ├── 01_seeds.sql
+|   ├── 02_seeds.sql
 ```
 
 * `db` contains all the database interaction code.

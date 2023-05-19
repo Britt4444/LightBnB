@@ -9,7 +9,8 @@ const pool = new Pool({
   user: 'labber',
   password: '123',
   host: 'localhost',
-  database: 'lightbnb'
+  database: 'lightbnb',
+  port: '5432'
 });
 
 /// Users

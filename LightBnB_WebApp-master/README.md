@@ -51,7 +51,7 @@ This project focused on implementing complex SQL queries with node-postgres alon
 ## LightBnB Database Entity Relationship Diagram
 
 *ERD*
-![LightBnB ERD](https://github.com/Britt4444/LightBnB/blob/master/LightBnB_WebApp-master/public/docs/drawSQL-lighthousebnb-erd-export-2023-05-17.png?raw=true)
+![LightBnB ERD]()
 
 ## Final Product
 

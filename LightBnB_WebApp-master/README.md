@@ -12,8 +12,20 @@ The simple design allows users to:
 1. [Create](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) a new repository using this repository as a template.
 2. Clone your repository onto your local device.
 3. Install dependencies using the `npm install` command.
-3. Start the web server using the `node server` command. The app will be served at <http://localhost:3000/>.
-4. Go to <http://localhost:3000/> in your browser.
+4. Create an .env file in the project folder to store relevant environment variables, in the format:
+    - PGUSER='user'
+    - PGHOST='host_name'
+    - PGPASSWORD='password'
+    - PGDATABASE='database_name' 
+    - PGPORT='port_number'
+5. To seed LightBnB with dummy data to interact with, connect to the database via node-postgres (pg) and run the following within the relevant directory:
+    - `\i ../migrations/01_schema.sql` to create all database tables
+    - `\i ../seeds/01_seeds.sql` to add data to the tables
+    - `\i ../seeds/02_seeds.sql` to add even more data to the tables
+6. Start the web server using the `node server` command. The app will be served at <http://localhost:3000/>.
+7. Go to <http://localhost:3000/> in your browser.
+8. Log in as any user from the seed files using the user email along with the password 'password'.
+9. You are also able to create your own user log in to explore the LightBnB features.
 
 ## Dependencies
 
@@ -22,19 +34,37 @@ The simple design allows users to:
 - cookie-session
 - express
 - pg
+- dotenv
 
 ## Technology
-
-- This project was heavily focused on front-end development and design through the use of HTML, CSS, Sass, JS, jQuery, and AJAX.
-- On the backend, the server framework was developed using Node and Express. 
-It's all about that database. You'll build the back-end queries that allow users to search for accommodations in an online travel app. You'll connect to a PostgreSQL database using Node's postgres library and write the queries that deliver the right data to the front end.
+ 
+This project focused on implementing complex SQL queries, database and ERD (entity relationship diagram) design to integrate the database with a Node backend.
 
 ## Page Features
 
-- Select red double-arrow "Write a new tweet" button to toggle the new-tweet form.
-- Type tweet in the textarea once toggled, ensuring to not submit an empty tweet or tweet over 140 characters.
-- Click "Tweet" button to submit tweet.
-- When scrolling, click circular, up-arrow button to return to the top of the page.
+- Select "Sign Up" to create a new user profile; log in/log out with this email and password
+- Alternately, select "Log In" and enter a fake email and 'password' to log in with seed data
+- Click "Search" to search for rental properties
+- Click "Create Listing" to enter a new rental property into the database
+- Click "My Listings" to view
+
+## Final Product
+
+*Home*
+![Home page - not logged in](https://github.com/Britt4444/LightBnB/blob/master/LightBnB_WebApp-master/public/docs/homepage.png?raw=true)
+
+*Sign Up new user*
+![Sign up new user form](https://github.com/Britt4444/LightBnB/blob/master/LightBnB_WebApp-master/public/docs/createnewlogin.png?raw=true)
+
+*My Listings*
+![User property listings](https://github.com/Britt4444/LightBnB/blob/master/LightBnB_WebApp-master/public/docs/mylistingsloggedin.png?raw=true)
+
+*My Reservations*
+![User reservations - starting with most recent](https://github.com/Britt4444/LightBnB/blob/master/LightBnB_WebApp-master/public/docs/myreservations.png?raw=true)
+
+*Search*
+![Search properties form](https://github.com/Britt4444/LightBnB/blob/master/LightBnB_WebApp-master/public/docs/searchproperties.png?raw=true)
+
 
 ## Project Structure
 
@@ -73,12 +103,17 @@ It's all about that database. You'll build the back-end queries that allow users
 ├── package-lock.json
 ├── package.json
 ├── README.md
-└── server.js
+|── server.js
+├── migrations  
+│   ├── 01_schema.sql
+├── seeds
+│   ├──01_seeds.sql
+|   ├──02_seeds.sql
 ```
 
 * `db` contains all the database interaction code.
   * `json` is a directory that contains a bunch of dummy data in `.json` files.
-  * `database.js` is responsible for all queries to the database. It doesn't currently connect to any database, all it does is return data from `.json` files.
+  * `database.js` is responsible for all queries to the database.
 * `public` contains all of the HTML, CSS, and client side JavaScript. 
   * `index.html` is the entry point to the application. It's the only html page because this is a single page application.
   * `javascript` contains all of the client side javascript files.
@@ -89,3 +124,8 @@ It's all about that database. You'll build the back-end queries that allow users
 * `routes` contains the router files which are responsible for any HTTP requests to `/users/something` or `/api/something`. 
 * `styles` contains all of the sass files. 
 * `server.js` is the entry point to the application. This connects the routes to the database.
+* `migrations` contains the schema file for the database.
+  * `01_schema.sql` contains the SQL schema of all tables in the database.
+* `seeds` contains the data seed files for the SQL database.
+  * `01_seeds.sql` contains seed data.
+  * `02_seeds.sql` contains seed data.

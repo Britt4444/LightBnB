@@ -22,7 +22,7 @@ The simple design allows users to:
     - `\i ../migrations/01_schema.sql` to create all database tables
     - `\i ../seeds/01_seeds.sql` to add data to the tables
     - `\i ../seeds/02_seeds.sql` to add even more data to the tables
-6. Start the web server using the `node server` command. The app will be served at <http://localhost:3000/>.
+6. Start the web server using the `node server` command from within the `LightBnB_WebApp-master` directory. The app will be served at <http://localhost:3000/>.
 7. Go to <http://localhost:3000/> in your browser.
 8. Log in as any user from the seed files using the user email along with the password 'password'.
 9. You are also able to create your own user log in to explore the LightBnB features.

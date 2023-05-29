@@ -11,7 +11,7 @@ The simple design allows users to:
 
 1. [Create](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) a new repository using this repository as a template.
 2. Clone your repository onto your local device.
-3. Install dependencies using the `npm install` command.
+3. `cd` into the `LightBnB_WebApp-master` directory and install dependencies using the `npm install` command.
 4. Create an .env file in the project folder to store relevant environment variables, in the format:
     - PGUSER='user'
     - PGHOST='host_name'
